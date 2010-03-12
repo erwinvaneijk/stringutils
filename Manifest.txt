@@ -1,0 +1,8 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/stringutils
+lib/stringutils.rb
+test/test_stringutils.rb
