@@ -5,7 +5,7 @@ but it feels too natural to say "s".dottify when debugging binary
 stuff.
 =end
 class StringUtils
-  VERSION = '1.0.0'
+  VERSION = '1.0.1'
 end
 
 class String
@@ -14,14 +14,32 @@ class String
   def hexify
     s = ""
     self.each_byte do |c|
-      s << c.ord.to_s(16).ljust(2,"0")
+      s << c.ord.to_s(16).rjust(2,"0")
     end
     s
   end
 
-  #Convert the string into the equivalent with all the
-  #non-printables converted to '.'
+  # Convert the string into the equivalent with all the
+  # non-printables converted to '.'
   def dottify
     self.gsub(/[^[:print:]]/, ".")
+  end
+  
+  # Convert the string into the binary equivalent
+  def to_binary
+    res = ""
+    temp = self.gsub(/[^[:xdigit:]]/, "")
+    temp.scan(/../).each {|blk| res << blk.hex.chr }
+    return res
+  end
+end
+
+class StringDigest < String
+  def beautify
+    if self.length % 4 != 0 then
+      raise InvalidDigestException("The length is not kosher")
+    end
+    
+    res.scan(/..../).join(" ")
   end
 end
