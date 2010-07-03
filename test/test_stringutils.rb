@@ -33,4 +33,26 @@ class TestStringutils < Test::Unit::TestCase
     assert_equal ("\x01"*10).hexify, "01"*10
     assert_equal ("\x10"*10).dottify, "."*10
   end
+  
+  def test_string_digest
+    x = StringDigest.new("0000111122223333aaaaffff")
+    assert_equal x.beautify, "0000 1111 2222 3333 aaaa ffff"
+    x = StringDigest.new("0000 1111 2222 3333 aaaa ffff")
+    assert_equal x.beautify, "0000 1111 2222 3333 aaaa ffff"
+    
+    assert_raise(InvalidDigestException) {
+      x = StringDigest.new("0000111122223333aaaaff")
+      ignore = x.beautify
+    }
+    
+    assert_raise(InvalidDigestException) {
+      x = StringDigest.new("0000 1111 2222 3333 aaaa ff")
+      ignore = x.beautify
+    }
+    
+    assert_raise(InvalidDigestException) {
+      x = StringDigest.new("all wrong")
+      ignore = x.beautify
+    }
+  end
 end

@@ -34,12 +34,24 @@ class String
   end
 end
 
+class InvalidDigestException < ArgumentError
+end
+
 class StringDigest < String
+  def initialize(s)
+    super(s)
+  end
+  
   def beautify
-    if self.length % 4 != 0 then
-      raise InvalidDigestException("The length is not kosher")
+    if not (/^[[:xdigit:][:space:]]*$/ === self) then
+      raise InvalidDigestException, "It's not a valid hexadecimal string"
     end
     
-    res.scan(/..../).join(" ")
+    temp = self.gsub(/[^[:xdigit:]]/,"")
+    if temp.length % 4 != 0 then
+      raise InvalidDigestException, "The length is not kosher"
+    end
+    
+    return temp.scan(/..../).join(" ")
   end
 end
