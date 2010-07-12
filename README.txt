@@ -1,6 +1,6 @@
 = stringutils
 
-* http://www.oakhill.nl/ruby/stringutils
+* git://github.com/erwinvaneijk/stringutils.git
 
 == DESCRIPTION:
 
