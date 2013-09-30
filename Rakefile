@@ -9,6 +9,7 @@ Hoe.spec 'stringutils' do
   self.extra_dev_deps << ['activesupport','~> 2.3.0']
   self.extra_dev_deps << ['rspec','~> 1.3.0']
   self.extra_dev_deps << ['shoulda','~> 3.5.0']
+  self.extra_dev_deps << ['autotest', '~> 4.4.0']
   self.rubyforge_name = 'stringutils' # if different than 'stringutils'
 end
 
