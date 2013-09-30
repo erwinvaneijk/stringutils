@@ -21,8 +21,8 @@ describe String do
   end
 
   it "should do binary conversions" do
-    "dead".to_binary.should eql "\xde\xad"
     "101010".to_binary.should eql "\x10\x10\x10"
+    "dead".to_binary.bytes.should eql [222, 173]
   end
 
   it "should handle all the same right" do
